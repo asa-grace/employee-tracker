@@ -13,7 +13,16 @@ const db = mysql.createConnection(
         host: 'localhost',
         user: 'root',
         password: 'Rootpass5359!',
-        database: 'election'
+        database: 'employees'
     },
-    console.log('Connected to the ')
-)
+    console.log('Connected to the employees database.')
+);
+
+// Default response
+app.use((req, res) => {
+    res.status(404).end();
+});
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
