@@ -1,28 +1,22 @@
 const express = require('express');
+const db = require('./db/connection');
 const PORT = process.env.PORT || 3001;
-const mysql = require('mysql2');
 const app = express();
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// Connection to Database
-const db = mysql.createConnection(
-    {
-        host: 'localhost',
-        user: 'root',
-        password: 'Rootpass5359!',
-        database: 'tracker'
-    },
-    console.log('Connected to the tracker database.')
-);
-
 // Default response
 app.use((req, res) => {
     res.status(404).end();
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+// start server after DB connection
+db.connect(err => {
+    if (err) throw err;
+    console.log('Database connected.');
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
 });

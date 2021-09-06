@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
 const cTable = require('console.table');
+const connection = require('./server');
 
 const promptUser = () => {
     return inquirer.prompt([
@@ -54,7 +55,7 @@ const promptUser = () => {
 
 function viewAllEmployees() {
     connection.query(
-        'SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department_name, CONCAT(manager.first_name, "", manager.last_name) AS manager FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employee manager ON manager.id = employee.manager_id',
+        'SELECT * FROM employee',
         (err, res) => {
             if (err) {
                 console.log(err);
@@ -78,7 +79,16 @@ function viewAllByDepartment() {
 };
 
 function viewAllByManager() {
-
+    connection.query(
+        'SELECT manager.first_name, "", manager.last_name) AS manager FROM employee LEFT JOIN employee manager ON manager.id = employee.manager_id',
+        (err, res) => {
+            if (err) {
+                console.log(err);
+            }
+            console.table(res)
+            promptUser();
+        }
+    )
 }
 
 function addEmployee() {
@@ -96,4 +106,5 @@ function updateByRole() {
 function updateByManager() {
 
 }
-promptUser()
+
+promptUser();

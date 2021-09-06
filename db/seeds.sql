@@ -1,5 +1,3 @@
-USE tracker;
-
 INSERT INTO department (name)
 VALUES
     ('Sales Lead'),
@@ -20,4 +18,12 @@ VALUES
 
 INSERT INTO employee (first_name, last_name, role_id, departments_id, manager_id)
 VALUES
-    ('John', 'Marsh', 1)
+    ('John', 'Marsh', 1),
+    ('Annabelle', 'Warner', 2),
+    ('Simon', 'Lizotte', 2),
+    ('Jonathan', 'Joestar', 3),
+    ('Michael', 'Mcmahon', 4),
+    ('Drew', 'Figures', 4),
+    ('Matthew', 'Brotha', 4),
+    ('Travis', 'Jordan', 5),
+    ('Melanie', 'McDaniels', 6);
