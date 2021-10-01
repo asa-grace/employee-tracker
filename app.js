@@ -10,101 +10,75 @@ const promptUser = () => {
             name: 'choices',
             message: 'What would you like to do?',
             choices: [
-                'View all employees',
-                'View all employees by department',
-                'View all employees by manager',
-                'Add employee',
-                'Remove employee',
-                'Update employee role',
-                'Update employee manager'
+                'view all departments',
+                'view all roles',
+                'view all employees',
+                'add a department',
+                'add a role',
+                'add an employee',
+                'update an employee role'
             ]
         }
     ])
     .then((answer) => {
         switch (answer.choices) {
-            case 'View all employees':
+            case 'view all departments':
+                viewAllDepartments();
+                break;
+
+            case 'view all roles':
+                viewAllRoles();
+                break;
+
+            case 'view all employees':
                 viewAllEmployees();
                 break;
-
-            case 'View all employees by department':
-                viewAllByDepartment();
-                break;
                 
-            case 'View all employees by manager':
-                viewAllByManager();
+            case 'add a department':
+                addDepartment();
                 break;
 
-            case 'Add employee':
+            case 'add a role':
+                addRole();
+                break;
+
+            case 'add an employee':
                 addEmployee();
                 break;
 
-            case 'Remove employee':
-                removeEmployee();
-                break;
-
-            case 'Update employee role':
+            case 'update an employee role':
                 updateByRole();
-                break;
-
-            case 'Update employee manager':
-                updateByManager();
                 break;
         }
     });
 }
 
+function viewAllDepartments() {
+    
+};
+
+function viewAllRoles() {
+
+};
+
 function viewAllEmployees() {
-    connection.query(
-        'SELECT * FROM employee',
-        (err, res) => {
-            if (err) {
-                console.log(err);
-            }
-            console.table(res)
-            promptUser();
-        }
-    )
+
 };
 
-function viewAllByDepartment() {
-    connection.query(
-        'SELECT * FROM department', (err, res) => {
-            if (err) {
-                console.log(err);
-            }
-            console.table(res)
-            promptUser();
-        }
-    )
+function addDepartment() {
+
 };
 
-function viewAllByManager() {
-    connection.query(
-        'SELECT manager.first_name, "", manager.last_name) AS manager FROM employee LEFT JOIN employee manager ON manager.id = employee.manager_id',
-        (err, res) => {
-            if (err) {
-                console.log(err);
-            }
-            console.table(res)
-            promptUser();
-        }
-    )
-}
+function addRole() {
+
+};
 
 function addEmployee() {
 
-}
-
-function removeEmployee() {
-
-}
+};
 
 function updateByRole() {
 
-}
-
-function updateByManager() {
-
-}
+};
 
 promptUser();

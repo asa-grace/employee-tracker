@@ -1,11 +1,16 @@
 const express = require('express');
 const db = require('./db/connection');
-const PORT = process.env.PORT || 3001;
+const apiRoutes = require('./routes/apiRoutes');
+
 const app = express();
+const PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+// Use apiRoutes
+app.use('/api', apiRoutes);
 
 // Default response
 app.use((req, res) => {
@@ -20,3 +25,5 @@ db.connect(err => {
         console.log(`Server running on port ${PORT}`);
     });
 });
+
+module.exports = router;
